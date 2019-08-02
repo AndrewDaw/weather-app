@@ -11,12 +11,9 @@ const request = require('request')
 
 const geocode = (address, mapboxKey, language, callback) => {
     const mapBoxUrl = 
-    'https://api.mapbox.com/geocoding/v5/mapbox.places/' +
-    encodeURIComponent(address) +
-    '.json?access_token=' +
-    encodeURIComponent(mapboxKey) +
-    '&language=' +
-    encodeURIComponent(language)
+    'https://api.mapbox.com/geocoding/v5/mapbox.places/' + encodeURIComponent(address) +
+    '.json?access_token=' + encodeURIComponent(mapboxKey) +
+    '&language=' + encodeURIComponent(language)
 
 
 
