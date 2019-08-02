@@ -1,4 +1,3 @@
-const request = require('request')
 const geocode = require('./utils/geocode')
 const forecast = require('./utils/forecast')
 //open weather api key required 
@@ -7,23 +6,31 @@ const mapboxKey = ''
 const language = 'en'
 
 
+//gets input, exits if doesnt exist
+const inputLoc = process.argv[2]
+if (!inputLoc){
+    console.log('Please provide a location')
+    return
+}
 
+geocode(inputLoc, mapboxKey, language, (error, locationData) => {
 
+    // console.log('Data', data)
+    if(error){
+        return console.log('Error', error)
+    }
 
-
-
-var lat = -41.28889
-var lng = 174.77722
-geocode('Wellington NZ', mapboxKey, language, (error, data) => {
-    console.log('Error', error)
-    console.log('Data', data)
-    lat = data.lat
-    lng = data.lng
+    forecast(locationData.lat, locationData.lng,
+            weatherKey, language, (error, forecastData) => {
+        if(error){
+            return console.log('Error', error)
+        }
+        console.log('Location: '+ locationData.location)
+        console.log("It is " + forecastData.temp + "C with " +
+                    forecastData.describe + ' in '+ locationData.location)
+    })
+    
 })
 
 
 
-forecast(lat, lng, weatherKey, language, (error, data) => {
-    console.log('Error', error)
-    console.log('Data', data)
-})

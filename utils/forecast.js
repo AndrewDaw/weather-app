@@ -1,7 +1,7 @@
 /*Forecast api
-*Geocode geocode function
-*address: Search term e.g. London England
-*mapBoxKey: api key. aquire from mapbox.com
+*Exports forecast function
+*lat, lng: Coordinates for weather data
+*mapBoxKey: api key. aquire from openweathermap.org
 *language: prefferred language of result e.g. en
 *callback:function that will be called when results are available
 */
