@@ -13,21 +13,20 @@ if (!inputLoc){
     return
 }
 
-geocode(inputLoc, mapboxKey, language, (error, locationData) => {
+geocode(inputLoc, mapboxKey, language, (error, {lat, lng, location}) => {
 
     // console.log('Data', data)
     if(error){
         return console.log('Error', error)
     }
 
-    forecast(locationData.lat, locationData.lng,
-            weatherKey, language, (error, forecastData) => {
+    forecast(lat, lng,
+            weatherKey, language, (error, {temp, describe}) => {
         if(error){
             return console.log('Error', error)
         }
-        console.log('Location: '+ locationData.location)
-        console.log("It is " + forecastData.temp + "C with " +
-                    forecastData.describe + ' in '+ locationData.location)
+        console.log("It is " + temp + "C with " +
+                    describe + ' in '+ location)
     })
     
 })

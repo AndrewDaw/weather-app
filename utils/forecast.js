@@ -10,23 +10,23 @@
 const request = require('request')
 
 const forecast = (lat, lng, weatherKey, language, callback) => {
-    const weatherUrl = 
+    const url = 
     'http://api.openweathermap.org/data/2.5/weather?lat='+ encodeURIComponent(lat) +
     '&lon='+ encodeURIComponent(lng) +
     '&appid=' + encodeURIComponent(weatherKey) +
     '&units=metric' +
     '&lang=' + encodeURIComponent(language)
 
-    request({ url: weatherUrl, json: true}, (error, response)=>{
+    request({ url, json: true}, (error, {body})=>{
         if(error){
             callback('Unable to get weather', undefined)
-        } else if (response.body.cod === '400'){
+        } else if (body.cod === '400'){
             callback('Unable to find location', undefined)
         }else{
             callback(undefined, {
-            temp : response.body.main.temp,
-            describe: response.body.weather[0].description,
-            place: response.body.name
+            temp : body.main.temp,
+            describe: body.weather[0].description,
+            place: body.name
             })
         }
     
